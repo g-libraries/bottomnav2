@@ -116,9 +116,10 @@ abstract class BottomNavigatorImpl constructor(var activity: Activity, var param
     private fun enableMenuItems() {
         for (i: Int in 0 until navigationView.menu.size()) {
             navigationView.menu[i].let {
-                it.isEnabled = true
                 it.icon.alpha =
                     params.alphaEnabled
+                it.isEnabled = true
+                it.icon.invalidateSelf()
             }
         }
         if (guest) disableMenuItems(params.notAuthIds)
@@ -129,9 +130,10 @@ abstract class BottomNavigatorImpl constructor(var activity: Activity, var param
         for (i: Int in 0 until list.size) {
             val id = list[i]
             getById(navigationView.menu, id)?.let {
-                it.isEnabled = enabled
                 it.icon.alpha =
                     params.alphaDisabled
+                it.isEnabled = enabled
+                it.icon.invalidateSelf()
             }
         }
     }
